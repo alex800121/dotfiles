@@ -7,6 +7,10 @@
       experimental-features = "nix-command flakes";
     };
   };
+
+  nixpkgs.config = {
+    allowBroken = true;
+  };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "alex800121";
@@ -25,8 +29,52 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+    shellOptions = [
+       "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" "-cdspell"
+    ];
+    shellAliases = {
+      ls = "ls --color=auto";
+      ll = "ls -alF";
+      la = "ls -A";
+      l = "ls -CF";
+      sshrpi4 = "ssh alex800121@alexrpi4gate.duckdns.org";
+      sshubuntu = "ssh alex800121@alexubuntugate.duckdns.org";
+      sshdormrpi = "ssh -p 40000 pi@alexrpi4gate.duckdns.org";
+      sshdormubu = "ssh -p 40000 pi@alexubuntugate.duckdns.org";
+      nv = "nvim";
+    };
+    # historyControl = [ "ignoredups" "ignorespace" ];
+    historyFileSize = 100000;
+    historySize = 10000;
+    bashrcExtra = ''
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+        . $HOME/.nix-profile/etc/profile.d/nix.sh;
+      fi
+
+      PS1='\[\033[01;34m\]\W \[\033[00m\]\$ '
+      set -o vi
+      HISTCONTROL=ignoreboth
+    '';
+  };
+  programs.readline = {
+    enable = true;
+    extraConfig = "set completion-ignore-case On";
+  };
+  # targets.genericLinux.enable = true;
+
+  # programs.bash = {
+  #   # enable = true;
+  # };
+
   home.packages = (with pkgs; [
-    curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs
+    curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs 
   ] );
 
   home.file = {
@@ -42,12 +90,6 @@
     # "\.bash_logout".source = programs/bash/.bash_logout;
   };
 
-  xdg.configFile = {
-    "nvim" = {
-      recursive = true;
-      source = programs/nvim;
-    };
-  };
 
   programs.neovim = let
     smart-splits-nvim = pkgs.vimUtils.buildVimPlugin {
@@ -94,6 +136,11 @@
       fd
       tree-sitter
     ] );
+    extraConfig = "luafile $HOME/.config/nvim/init_lua.lua";
+  };
+  xdg.configFile.nvim = {
+    recursive = true;
+    source = ./programs/nvim;
   };
 
   programs.git = {
