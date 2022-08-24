@@ -126,15 +126,20 @@
       friendly-snippets
       nvim-lspconfig
       telescope-nvim
-      nvim-treesitter
       playground
       nvim-ts-rainbow
       smart-splits-nvim
+      ( nvim-treesitter.withPlugins (plugins: with pkgs.tree-sitter-grammars; [
+        tree-sitter-c
+        tree-sitter-haskell
+        tree-sitter-nix
+        tree-sitter-lua
+        tree-sitter-rust
+      ] ) )
     ] );
     extraPackages = ( with pkgs; [
       rnix-lsp
       fd
-      tree-sitter
     ] );
     extraConfig = "luafile $HOME/.config/nvim/init_lua.lua";
   };
