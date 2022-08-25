@@ -67,11 +67,8 @@
     enable = true;
     extraConfig = "set completion-ignore-case On";
   };
-  # targets.genericLinux.enable = true;
+  targets.genericLinux.enable = true;
 
-  # programs.bash = {
-  #   # enable = true;
-  # };
 
   home.packages = (with pkgs; [
     curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs gh
@@ -167,7 +164,7 @@
   #   };
   # };
   
-  programs.htop.enable = true;
+  # programs.htop.enable = true;
 
   programs.tmux = {
     enable = true;
