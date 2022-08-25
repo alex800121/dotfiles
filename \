@@ -54,6 +54,10 @@
     historyFileSize = 100000;
     historySize = 10000;
     bashrcExtra = ''
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+        . $HOME/.nix-profile/etc/profile.d/nix.sh;
+      fi
+
       PS1='\[\033[01;34m\]\W \[\033[00m\]\$ '
       set -o vi
       HISTCONTROL=ignoreboth
