@@ -11,7 +11,7 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    homeConfigurations.alex800121 = home-manager.lib.homeMangerConfiguration {
+    homeConfigurations.alex800121 = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
         ./home.nix
