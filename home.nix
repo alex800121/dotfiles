@@ -4,12 +4,14 @@
   nix = {
     package = pkgs.nix;
     settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = "nix-command flakes repl-flake";
     };
   };
 
   nixpkgs.config = {
     allowBroken = true;
+    allowUnfree = true;
+    allowUnsupportedSystem = true;
   };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -65,9 +67,16 @@
   };
   targets.genericLinux.enable = true;
 
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
+
 
   home.packages = (with pkgs; [
     curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs gh
+    cabal-install haskell-language-server ghc ghcid
   ] );
 
   home.file = {
