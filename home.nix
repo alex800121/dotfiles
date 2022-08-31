@@ -76,7 +76,7 @@
 
   home.packages = (with pkgs; [
     curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs gh
-    cabal-install haskell-language-server ghc ghcid
+    # cabal-install haskell-language-server ghc ghcid
   ] );
 
   home.file = {
