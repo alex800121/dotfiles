@@ -73,6 +73,10 @@
     nix-direnv.enable = true;
   };
 
+  programs.ssh = {
+    enable = true;
+    hashKnownHosts = true;
+  };
 
   home.packages = (with pkgs; [
     curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs
