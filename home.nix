@@ -75,7 +75,7 @@
 
 
   home.packages = (with pkgs; [
-    curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs gh
+    curl neofetch freshfetch ripgrep wget gcc_multi gccMultiStdenv xclip nodejs
     rustup
     # cabal-install haskell-language-server ghc ghcid
   ] );
@@ -156,19 +156,19 @@
     userName = "alex800121";
     userEmail = "alex800121@hotmail.com";
   };
-
-  # programs.gh = {
-  #   enable = true;
-  #   enableGitCredentialHelper = true;
-  #   settings = {
-  #     git_protocol = "ssh";
-  #     prompt = "enabled";
-  #     aliases = {
-  #       co = "pr checkout";
-  #     };
-  #     editor = "nvim";
-  #   };
-  # };
+  
+  programs.gh = {
+    enable = true;
+    enableGitCredentialHelper = true;
+    settings = {
+      git_protocol = "ssh";
+      prompt = "enabled";
+      aliases = {
+        co = "pr checkout";
+      };
+      editor = "nvim";
+    };
+  };
   
   programs.htop.enable = true;
 
